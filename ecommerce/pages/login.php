@@ -25,32 +25,34 @@ if (isset($_POST['login'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            /* Gradient background */
+            background: linear-gradient(135deg, #667eea, #764ba2);
             margin: 0;
             padding: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
         .login-container {
             background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
+            color: #333;
         }
         h2 {
             text-align: center;
-            color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 700;
         }
         label {
             font-size: 1.1em;
@@ -60,31 +62,37 @@ if (isset($_POST['login'])) {
         input[type="email"],
         input[type="password"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 12px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
             font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #764ba2;
+            outline: none;
         }
         button {
             width: 100%;
-            padding: 12px;
-            background-color: #28a745;
+            padding: 14px;
+            background-color: #764ba2;
             color: white;
-            font-size: 1.1em;
+            font-size: 1.2em;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #5a3679;
         }
         .error-message {
             color: #e74c3c;
             font-size: 1em;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
     </style>
 </head>

@@ -20,24 +20,31 @@ if (isset($_POST['add_product'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Add Product</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            /* Gradient background */
+            background: linear-gradient(135deg, #6dd5fa, #2980b9);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .container {
             width: 50%;
-            margin: 50px auto;
             background-color: #fff;
             padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            color: #333;
         }
         h2 {
             text-align: center;
+            margin-bottom: 25px;
         }
         form {
             display: flex;
@@ -52,14 +59,17 @@ if (isset($_POST['add_product'])) {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 16px;
         }
         button {
             background-color: #4CAF50;
             color: white;
             padding: 15px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #45a049;
@@ -71,6 +81,11 @@ if (isset($_POST['add_product'])) {
         .back-link a {
             text-decoration: none;
             color: #4CAF50;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .back-link a:hover {
+            color: #388e3c;
         }
     </style>
 </head>
