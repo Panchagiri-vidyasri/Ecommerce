@@ -1,35 +1,4 @@
-Here is your **GitHub-friendly `README.md` file** formatted in Markdown, based on your PHP eCommerce project and screenshots:
-
----
-
-```markdown
 # 🛒 PHP E-Commerce Website
-
-A basic eCommerce web application built using **PHP**, **MySQL**, **HTML**, and **CSS**, offering product browsing, user login, cart functionality, and an admin panel for product management.
-
----
-
-## 📸 Screenshots
-
-### 🏠 Homepage
-![Homepage](images/homepage.png)
-
-### 🛒 Cart Page
-![Cart](images/cart.png)
-
-### 🔐 User Login
-![User Login](images/user-login.png)
-
-### 🧑‍💼 Admin Dashboard
-![Admin Dashboard](images/admin-dashboard.png)
-
-### ➕ Add Product
-![Add Product](images/add-product.png)
-
-> 📌 *Make sure to store screenshots in a folder named `images/` within your repo.*
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -122,9 +91,6 @@ http://localhost/ecommerce/index.php
 * UI inspired by basic eCommerce layouts
 * Educational project built from scratch using PHP and MySQL
 
----
-
-```
 
 ---
 
