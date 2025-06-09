@@ -1,7 +1,7 @@
 <?php
-$host = '127.0.0.1';     // Use localhost or 127.0.0.1
-$port = '3307';          // Change this to your MySQL port, if different from default
-$dbname = 'ecommerce';   // Your database name
+$host = 'localhost';
+$port = '3307'; // More likely than 3307
+$dbname = 'ecommerce';  // Your database name
 $user = 'root';          // MySQL username
 $password = '';          // MySQL password (empty by default in XAMPP)
 
