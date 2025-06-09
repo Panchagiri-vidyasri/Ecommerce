@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $port = '3307'; // More likely than 3307
-$dbname = 'ecommerce';  // Your database name
+$dbname = 'ecommerce';   // Your database name
 $user = 'root';          // MySQL username
 $password = '';          // MySQL password (empty by default in XAMPP)
 
