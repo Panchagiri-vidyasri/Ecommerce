@@ -1,20 +1,20 @@
-# Use official PHP-Apache image
+# Use official PHP image with Apache
 FROM php:8.2-apache
 
-# Enable Apache mod_rewrite
+# Enable Apache rewrite module
 RUN a2enmod rewrite
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /var/www/html/
 
-# Copy the contents of the ecommerce folder into Apache's web root
-COPY ./Ecommerce-main/ecommerce/ /var/www/html/
+# Copy your ecommerce application files into Apache web root
+COPY ./ecommerce/ /var/www/html/
 
-# Set proper permissions (optional but helpful)
-RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+# (Optional) Set permissions for Apache user (www-data)
+RUN chown -R www-data:www-data /var/www/html/
 
-# Optional: suppress Apache ServerName warning
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-# Expose port 80
+# Expose port 80 for the web server
 EXPOSE 80
+
+# Start Apache in the foreground
+CMD ["apache2-foreground"]
