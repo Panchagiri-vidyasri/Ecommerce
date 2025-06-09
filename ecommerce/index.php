@@ -2,13 +2,9 @@
 session_start();
 
 if (isset($_POST['logout'])) {
-    // Clear all session variables
     $_SESSION = [];
-
-    // Destroy the session
     session_destroy();
 
-    // Clear session cookie
     if (ini_get("session.use_cookies")) {
         $params = session_get_cookie_params();
         setcookie(session_name(), '', time() - 42000,
@@ -16,70 +12,68 @@ if (isset($_POST['logout'])) {
             $params["secure"], $params["httponly"]
         );
     }
-
-    // Redirect to login page after logout
     header("Location: pages/login.php");
     exit();
 }
 
-include 'includes/db.php'; // Include the database connection
+include 'includes/db.php';
 
-// Fetch products from the database
-$stmt = $conn->query("SELECT * FROM products");
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$products = [];
+if (isset($conn)) {
+    try {
+        $stmt = $conn->query("SELECT * FROM products");
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "<p style='color:red;'>Failed to fetch products: " . htmlspecialchars($e->getMessage()) . "</p>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Online Store</title>
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <h1>Welcome to Our Store</h1>
-            <nav>
-                <a href="pages/login.php">Login</a>
-                <a href="pages/register.php">Register</a>
-                <a href="pages/cart.php" class="cart-link">
-                    <img src="images/cart-icon.png" alt="Cart" class="cart-icon" />
-                    Cart
-                </a>
-                <form method="POST" style="display: inline;">
-                    <button type="submit" name="logout" class="logout-button">Logout</button>
-                </form>
-            </nav>
-        </div>
+        <h1>Welcome to Our Store</h1>
+        <nav>
+            <a href="pages/login.php">Login</a>
+            <a href="pages/register.php">Register</a>
+            <a href="pages/cart.php"><img src="images/cart-icon.png" alt="Cart" /> Cart</a>
+            <form method="POST" style="display:inline;">
+                <button type="submit" name="logout">Logout</button>
+            </form>
+        </nav>
     </header>
-    <div class="main-container">
-        <main>
-            <h2>Products</h2>
-            <div class="product-list">
-            <?php if (empty($products)) : ?>
-                <p>No products available.</p>
-            <?php else : ?>
-                <?php foreach ($products as $product) : ?>
-                    <div class="product">
-                        <h3><?= htmlspecialchars($product['name']); ?></h3>
-                        <p>Price: $<?= number_format($product['price'], 2); ?></p>
-                        <p><?= htmlspecialchars($product['description']); ?></p>
-                        <?php if (!empty($product['image'])) : ?>
-                            <img src="images/<?= htmlspecialchars($product['image']); ?>" alt="<?= htmlspecialchars($product['name']); ?>" class="product-image" />
-                        <?php endif; ?>
-                        <form method="POST" action="pages/cart.php">
-                            <input type="hidden" name="product_id" value="<?= $product['id']; ?>" />
-                            <button type="submit" name="add_to_cart" class="add-to-cart-button">Add to Cart</button>
-                        </form>
-                    </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
-            </div>
-        </main>
-    </div>
+
+    <main>
+        <h2>Products</h2>
+        <div class="product-list">
+        <?php if (empty($products)): ?>
+            <p>No products available.</p>
+        <?php else: ?>
+            <?php foreach ($products as $product): ?>
+                <div class="product">
+                    <h3><?= htmlspecialchars($product['name']); ?></h3>
+                    <p>Price: $<?= number_format($product['price'], 2); ?></p>
+                    <p><?= htmlspecialchars($product['description']); ?></p>
+                    <?php if (!empty($product['image'])): ?>
+                        <img src="images/<?= htmlspecialchars($product['image']); ?>" alt="<?= htmlspecialchars($product['name']); ?>" />
+                    <?php endif; ?>
+                    <form method="POST" action="pages/cart.php">
+                        <input type="hidden" name="product_id" value="<?= $product['id']; ?>" />
+                        <button type="submit" name="add_to_cart">Add to Cart</button>
+                    </form>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        </div>
+    </main>
+
     <footer>
-        <p>&copy; <?= date('Y'); ?> Online Store. All rights reserved.</p>
+        <p>&copy; <?= date('Y'); ?> Online Store</p>
     </footer>
 </body>
 </html>
